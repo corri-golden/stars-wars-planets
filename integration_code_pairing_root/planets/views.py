@@ -23,7 +23,21 @@ def get_by_id(request, id):
             terrain=response['terrain'],
             surface_water=int(response['surface_water'])
         )
-        planet.save()
+        planet.save()      
+    return JsonResponse(planet.to_dict(), status=200)
+
+def get_planet_by_pop(request, population):
+    try:
+        planets = Planet.objects.filter(population=population)
+        for planet in planets:
+            planet = planet.to_dict()
+            return JsonResponse(planet, status=200)
+    except ValueError:
+        print("There are no planets with that population")
+
     
-    return JsonResponse(planet.to_json(), status=200)
+    
+    
+        
+
     
