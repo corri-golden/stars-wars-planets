@@ -26,6 +26,7 @@ def get_by_id(request, id):
         planet.save()      
     return JsonResponse(planet.to_dict(), status=200)
 
+# search by population
 def get_planet_by_pop(request, population):
     try:
         planets = Planet.objects.filter(population=population)
